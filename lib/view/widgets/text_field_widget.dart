@@ -24,6 +24,11 @@ class CustomTextFieldWidget extends StatelessWidget {
             color: Color.fromARGB(255, 143, 140, 140),
           ),
         ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Color.fromARGB(255, 143, 140, 140),
+          ),
+        ),
         labelText: label,
       ),
       maxLines: maxLines,

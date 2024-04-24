@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, unused_local_variable, avoid_print
 
 import 'dart:io';
 import 'package:axnoltest/view/widgets/constant_height.dart';
@@ -7,13 +7,20 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
+  const EditProfileScreen({super.key, required this.user});
+  final Map<String, dynamic> user;
 
   @override
   _EditProfileScreenState createState() => _EditProfileScreenState();
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
+  TextEditingController firstNameController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController mobileNoController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
   File? _image;
   final picker = ImagePicker();
 
@@ -25,6 +32,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         _image = File(pickedFile.path);
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    firstNameController.text = widget.user['fname'];
+    lastNameController.text = widget.user['lname'];
+    mobileNoController.text = widget.user['mobile'];
+    addressController.text = widget.user['address'];
   }
 
   @override
@@ -91,15 +107,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   ),
                 ),
                 const ConstantHeight(size: 0.02),
-                const CustomTextFieldWidget(label: "First Name *"),
+                CustomTextFieldWidget(controller: firstNameController, label: "First Name *"),
                 const ConstantHeight(size: 0.02),
-                const CustomTextFieldWidget(label: "Last Name *"),
+                CustomTextFieldWidget(controller: lastNameController, label: "Last Name *"),
                 const ConstantHeight(size: 0.02),
-                const CustomTextFieldWidget(label: "Mobile Number *"),
+                CustomTextFieldWidget(controller: mobileNoController, label: "Mobile Number *"),
                 const ConstantHeight(size: 0.02),
-                const CustomTextFieldWidget(label: "Password *"),
+                CustomTextFieldWidget(controller: passwordController, label: "Password *"),
                 const ConstantHeight(size: 0.02),
-                const CustomTextFieldWidget(label: "Address *"),
+                CustomTextFieldWidget(controller: addressController, label: "Address *"),
                 const ConstantHeight(size: 0.02),
                 const CustomTextFieldWidget(
                   label: "Detail *",

@@ -93,10 +93,13 @@ class LoginScreen extends StatelessWidget {
                       if (loginResult != null) {
                         if (loginResult.containsKey('access_token')) {
                           log('Login successful');
+                          Map<String, dynamic> user = loginResult['user'];
 
                           Navigator.of(context).push(
                             MaterialPageRoute(
-                              builder: (context) => const EditProfileScreen(),
+                              builder: (context) => EditProfileScreen(
+                                user: user,
+                              ),
                             ),
                           );
                         } else if (loginResult.containsKey('error')) {
